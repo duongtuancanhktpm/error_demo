@@ -15,6 +15,23 @@ class _PlayerScreenState extends State<PlayerScreen> {
   final controller = Get.put(PlayerController());
 
   @override
+  void initState() {
+    controller.playerController = PodPlayerController(
+      playVideoFrom: PlayVideoFrom.youtube(PlayerController.url1),
+      podPlayerConfig: const PodPlayerConfig(
+        autoPlay: true,
+      ),
+    )..initialise();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.playerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("test")),
